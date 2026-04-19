@@ -103,7 +103,7 @@ ${CROSS_COMPILE}readelf -a ${OUTDIR}/busybox/busybox | grep "Shared library"
 # Copy library dependencies
 echo "Copying library dependencies to rootfs"
 SYSROOT=$(${CROSS_COMPILE}gcc -print-sysroot)
-echo "copying interpreter"
+echo "copying interpreter and dependencies from sysroot ${SYSROOT}"
 cp -a ${SYSROOT}/lib/ld-linux-aarch64.so.1 ${OUTDIR}/rootfs/lib/
 echo "copying  dynamic libraries"
 cp -a ${SYSROOT}/lib64/libm.so.6 ${OUTDIR}/rootfs/lib64/
@@ -147,7 +147,7 @@ cp writer ${OUTDIR}/rootfs/home/
 cp finder.sh ${OUTDIR}/rootfs/home/
 cp finder-test.sh ${OUTDIR}/rootfs/home/
 cp autorun-qemu.sh ${OUTDIR}/rootfs/home/
-cp -r conf/ ${OUTDIR}/rootfs/home/
+cp -r ../conf/ ${OUTDIR}/rootfs/home/
 cp Makefile ${OUTDIR}/rootfs/home/
 cp writer.sh ${OUTDIR}/rootfs/home/
 cp writer.c ${OUTDIR}/rootfs/home/
